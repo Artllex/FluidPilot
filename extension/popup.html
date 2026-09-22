@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FluidPilot</title><link rel="stylesheet" href="popup.css"><script src="i18n.js" defer></script><script src="popup.js" defer></script></head>
 <body class="popup">
-  <header><img src="icons/icon-48.png" alt=""><div><h1>FluidPilot</h1><p data-i18n="tagline"></p></div></header>
-  <label class="language-picker"><span data-i18n="language"></span><select id="language" aria-label="Polski / English"><option value="pl">Polski</option><option value="en">English</option></select></label>
-  <section class="card intro"><h2 data-i18n="settingsTitle"></h2><label class="setting-row" for="hide-cursor"><span><strong data-i18n="hideCursor"></strong><small data-i18n="hideCursorDescription"></small></span><input id="hide-cursor" type="checkbox"></label></section>
-  <section class="card"><h2 data-i18n="shortcutsTitle"></h2><dl class="shortcuts"><div><dt>L</dt><dd data-i18n="shortcutLoop"></dd></div><div><dt>Z / X + ← →</dt><dd data-i18n="shortcutEdges"></dd></div><div><dt>G</dt><dd data-i18n="shortcutGif"></dd></div><div><dt>F</dt><dd data-i18n="shortcutVideo"></dd></div><div><dt>P</dt><dd data-i18n="shortcutVolume"></dd></div></dl></section>
+  <header><img src="icons/icon-48.png" alt=""><div class="brand"><h1>FluidPilot</h1><p data-i18n="tagline"></p></div><label class="language-picker"><span class="sr-only" data-i18n="language"></span><select id="language" aria-label="Polski / English"><option value="pl">PL</option><option value="en">EN</option></select></label></header>
+  <section class="card intro"><label class="setting-row" for="hide-cursor"><span><strong data-i18n="hideCursor"></strong><small data-i18n="hideCursorDescription"></small></span><input id="hide-cursor" type="checkbox"></label></section>
+  <section class="card shortcuts-card"><h2 data-i18n="shortcutsTitle"></h2><dl class="shortcuts"><div><dt>L</dt><dd data-i18n="shortcutLoop"></dd></div><div><dt>Z / X + ← →</dt><dd data-i18n="shortcutEdges"></dd></div><div><dt>G</dt><dd data-i18n="shortcutGif"></dd></div><div><dt>F</dt><dd data-i18n="shortcutVideo"></dd></div><div><dt>P</dt><dd data-i18n="shortcutVolume"></dd></div></dl></section>
   <p id="notice" role="status" aria-live="polite"></p>
   <footer><span data-i18n="privacy"></span><p>© 2026 Arkadiusz Pajda · Artllex</p></footer>
 </body></html>
