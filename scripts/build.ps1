@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 $source = Join-Path $repo 'extension'
 $dist = Join-Path $repo 'dist'
-$output = Join-Path $dist 'FluidPilot-3.1.2.xpi'
+$output = Join-Path $dist 'FluidPilot-3.2.0.xpi'
 
 New-Item -ItemType Directory -Force -Path $dist | Out-Null
 if (Test-Path -LiteralPath $output) {

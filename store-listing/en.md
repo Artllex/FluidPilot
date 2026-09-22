@@ -10,11 +10,11 @@ FluidPilot improves websites that use a compatible Fluid Player layout. It adds 
 
 The optional 5% volume mode can be toggled with a shortcut and is saved across Firefox tabs and sessions.
 
-The SeatKeeper-style panel lets you choose Polish or English and decide whether the cursor remains visible over the player.
+The SeatKeeper-style panel lets you choose Polish or English, decide whether the cursor remains visible over the player, and set GIF quality: 480–1280 px resolution, 6 / 12 / 15 fps, a 60 / 120 / 180-frame limit, and color smoothing.
 
 The extension activates automatically when it detects a supported player. It does not collect or transmit user data.
 
 ## Permission rationale
 
 - **Website access:** required to detect embedded Fluid Player instances and add controls.
-- **Extension storage:** used only to retain the global 5% volume preference.
+- **Extension storage:** used only to retain local preferences for language, cursor visibility, GIF quality, and global 5% volume.

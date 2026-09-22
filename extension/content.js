@@ -88,14 +88,23 @@ browser.storage.local.get().then(initialStorage => {
     const LOOP_DEFAULT_RADIUS = 1;
     const TIMELINE_SEEK_WINDOW_MS = 1000;
     const EPSILON = 0.000001;
-    const GIF_MAX_WIDTH_PX = 1280;
-    const GIF_TARGET_FPS = 12;
-    const GIF_MAX_FRAMES = 180;
+    const GIF_MAX_WIDTH_DEFAULT = 1280;
+    const GIF_TARGET_FPS_DEFAULT = 12;
+    const GIF_MAX_FRAMES_DEFAULT = 180;
+    const GIF_MAX_WIDTH_OPTIONS = new Set([480, 720, 960, 1280]);
+    const GIF_TARGET_FPS_OPTIONS = new Set([6, 12, 15]);
+    const GIF_MAX_FRAMES_OPTIONS = new Set([60, 120, 180]);
     const QUIET_MODE_KEY = 'fluidpilot-volume-5-enabled';
     const QUIET_PREVIOUS_VOLUME_KEY = 'fluidpilot-volume-before-5';
     const HIDE_CURSOR_KEY = 'fluidpilot-hide-cursor';
+    const GIF_MAX_WIDTH_KEY = 'fluidpilot-gif-max-width';
+    const GIF_TARGET_FPS_KEY = 'fluidpilot-gif-fps';
+    const GIF_MAX_FRAMES_KEY = 'fluidpilot-gif-max-frames';
+    const GIF_DITHER_KEY = 'fluidpilot-gif-dither';
     const getVideo = () => document.querySelector(VIDEO);
     const clamp = (n, lo, hi) => Math.max(lo, Math.min(n, hi));
+    const normalizeGifOption = (value, options, fallback) =>
+        options.has(Number(value)) ? Number(value) : fallback;
     let loopEnabled = false;
     let loopStart = 0;
     let loopEnd = 0;
@@ -108,6 +117,22 @@ browser.storage.local.get().then(initialStorage => {
     let loopAnimationFrame = null;
     let quietModeEnabled = Boolean(GM_getValue(QUIET_MODE_KEY, false));
     let hideCursorEnabled = Boolean(GM_getValue(HIDE_CURSOR_KEY, false));
+    let gifMaxWidthPx = normalizeGifOption(
+        GM_getValue(GIF_MAX_WIDTH_KEY, GIF_MAX_WIDTH_DEFAULT),
+        GIF_MAX_WIDTH_OPTIONS,
+        GIF_MAX_WIDTH_DEFAULT
+    );
+    let gifTargetFps = normalizeGifOption(
+        GM_getValue(GIF_TARGET_FPS_KEY, GIF_TARGET_FPS_DEFAULT),
+        GIF_TARGET_FPS_OPTIONS,
+        GIF_TARGET_FPS_DEFAULT
+    );
+    let gifMaxFrames = normalizeGifOption(
+        GM_getValue(GIF_MAX_FRAMES_KEY, GIF_MAX_FRAMES_DEFAULT),
+        GIF_MAX_FRAMES_OPTIONS,
+        GIF_MAX_FRAMES_DEFAULT
+    );
+    let gifDitherEnabled = GM_getValue(GIF_DITHER_KEY, true) !== false;
     let quietModeApplying = false;
     let pointerKnown = false;
     let pointerX = 0;
@@ -310,6 +335,15 @@ browser.storage.local.get().then(initialStorage => {
 
     function rgbaToGifPalette(rgba, width, height) {
         const indexed = new Uint8Array(width * height);
+        if (!gifDitherEnabled) {
+            for (let target = 0, source = 0; target < indexed.length; target++, source += 4) {
+                const redLevel = Math.round(rgba[source] * 5 / 255);
+                const greenLevel = Math.round(rgba[source + 1] * 6 / 255);
+                const blueLevel = Math.round(rgba[source + 2] * 5 / 255);
+                indexed[target] = redLevel * 42 + greenLevel * 6 + blueLevel;
+            }
+            return indexed;
+        }
         let currentR = new Float32Array(width + 2);
         let currentG = new Float32Array(width + 2);
         let currentB = new Float32Array(width + 2);
@@ -565,10 +599,10 @@ browser.storage.local.get().then(initialStorage => {
             const safeEnd = clamp(end, safeStart + EPSILON, exportVideo.duration);
             const duration = safeEnd - safeStart;
             const frameCount = Math.max(2, Math.min(
-                GIF_MAX_FRAMES,
-                Math.ceil(duration * GIF_TARGET_FPS)
+                gifMaxFrames,
+                Math.ceil(duration * gifTargetFps)
             ));
-            const width = Math.max(1, Math.min(GIF_MAX_WIDTH_PX, exportVideo.videoWidth));
+            const width = Math.max(1, Math.min(gifMaxWidthPx, exportVideo.videoWidth));
             const height = Math.max(1, Math.round(exportVideo.videoHeight * width / exportVideo.videoWidth));
             const canvas = document.createElement('canvas');
             canvas.width = width;
@@ -838,6 +872,18 @@ browser.storage.local.get().then(initialStorage => {
         GM_addValueChangeListener(HIDE_CURSOR_KEY, (_name, _oldValue, newValue) => {
             hideCursorEnabled = Boolean(newValue);
             applyCursorPreference();
+        });
+        GM_addValueChangeListener(GIF_MAX_WIDTH_KEY, (_name, _oldValue, newValue) => {
+            gifMaxWidthPx = normalizeGifOption(newValue, GIF_MAX_WIDTH_OPTIONS, GIF_MAX_WIDTH_DEFAULT);
+        });
+        GM_addValueChangeListener(GIF_TARGET_FPS_KEY, (_name, _oldValue, newValue) => {
+            gifTargetFps = normalizeGifOption(newValue, GIF_TARGET_FPS_OPTIONS, GIF_TARGET_FPS_DEFAULT);
+        });
+        GM_addValueChangeListener(GIF_MAX_FRAMES_KEY, (_name, _oldValue, newValue) => {
+            gifMaxFrames = normalizeGifOption(newValue, GIF_MAX_FRAMES_OPTIONS, GIF_MAX_FRAMES_DEFAULT);
+        });
+        GM_addValueChangeListener(GIF_DITHER_KEY, (_name, _oldValue, newValue) => {
+            gifDitherEnabled = newValue !== false;
         });
     }
     applyQuietMode();
