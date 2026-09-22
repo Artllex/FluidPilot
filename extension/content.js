@@ -93,6 +93,7 @@ browser.storage.local.get().then(initialStorage => {
     const GIF_MAX_FRAMES = 180;
     const QUIET_MODE_KEY = 'fluidpilot-volume-5-enabled';
     const QUIET_PREVIOUS_VOLUME_KEY = 'fluidpilot-volume-before-5';
+    const HIDE_CURSOR_KEY = 'fluidpilot-hide-cursor';
     const getVideo = () => document.querySelector(VIDEO);
     const clamp = (n, lo, hi) => Math.max(lo, Math.min(n, hi));
     let loopEnabled = false;
@@ -106,6 +107,7 @@ browser.storage.local.get().then(initialStorage => {
     let manualTimelineSeekUntil = 0;
     let loopAnimationFrame = null;
     let quietModeEnabled = Boolean(GM_getValue(QUIET_MODE_KEY, false));
+    let hideCursorEnabled = Boolean(GM_getValue(HIDE_CURSOR_KEY, false));
     let quietModeApplying = false;
     let pointerKnown = false;
     let pointerX = 0;
@@ -114,10 +116,18 @@ browser.storage.local.get().then(initialStorage => {
     let videoExportBusy = false;
     let gifStatusTimer = null;
 
+    const cursorStyle = GM_addStyle('');
+    function applyCursorPreference() {
+        const cursor = hideCursorEnabled ? 'none' : 'default';
+        cursorStyle.textContent = `
+            ${VIDEO}, ${VIDEO}:hover,
+            #fluid_video_wrapper_thisPlayer,
+            #fluid_video_wrapper_thisPlayer * { cursor: ${cursor} !important; }
+        `;
+    }
+    applyCursorPreference();
+
     GM_addStyle(`
-        ${VIDEO}, ${VIDEO}:hover,
-        #fluid_video_wrapper_thisPlayer,
-        #fluid_video_wrapper_thisPlayer * { cursor: default !important; }
         ${OLD_PREVIEW}, ${OLD_SHADOW} { display: none !important; }
         #fluidpilot-live-preview-box {
             position: fixed; display: none; width: 240px; height: 135px;
@@ -824,6 +834,10 @@ browser.storage.local.get().then(initialStorage => {
     if (typeof GM_addValueChangeListener === 'function') {
         GM_addValueChangeListener(QUIET_MODE_KEY, (_name, _oldValue, newValue) => {
             setQuietMode(Boolean(newValue));
+        });
+        GM_addValueChangeListener(HIDE_CURSOR_KEY, (_name, _oldValue, newValue) => {
+            hideCursorEnabled = Boolean(newValue);
+            applyCursorPreference();
         });
     }
     applyQuietMode();

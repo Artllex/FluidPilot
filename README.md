@@ -16,6 +16,7 @@ FluidPilot to rozszerzenie Firefox i userscript dla Violentmonkey, które rozbud
 - `Z + ←` / `Z + →` zmienia lewą granicę pętli.
 - `X + ←` / `X + →` zmienia prawą granicę pętli.
 - `P` przełącza globalny tryb głośności 5%, zapamiętywany między kartami i sesjami.
+- Panel pozwala ręcznie wybrać język polski lub angielski oraz włączyć ukrywanie kursora nad odtwarzaczem.
 - `G` eksportuje aktywną pętlę jako GIF 1280 px przy 12 klatkach/s.
 - `F` eksportuje aktywną pętlę jako nagranie WebM.
 - Podgląd klatki działa również 30 px nad i pod osią czasu.
@@ -46,6 +47,7 @@ FluidPilot is a Firefox extension and a Violentmonkey userscript that adds conve
 - `Z + ←` / `Z + →` adjusts the left loop edge.
 - `X + ←` / `X + →` adjusts the right loop edge.
 - `P` toggles a global 5% volume mode saved across tabs and sessions.
+- The panel lets you choose Polish or English and enable cursor hiding over the player.
 - `G` exports the active loop as a 1280 px GIF at 12 fps.
 - `F` exports the active loop as a WebM recording.
 - Frame preview remains active 30 px above and below the timeline.

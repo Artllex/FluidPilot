@@ -10,6 +10,8 @@ FluidPilot improves websites that use a compatible Fluid Player layout. It adds 
 
 The optional 5% volume mode can be toggled with a shortcut and is saved across Firefox tabs and sessions.
 
+The SeatKeeper-style panel lets you choose Polish or English and decide whether the cursor remains visible over the player.
+
 The extension activates automatically when it detects a supported player. It does not collect or transmit user data.
 
 ## Permission rationale

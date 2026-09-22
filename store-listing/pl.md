@@ -10,6 +10,8 @@ FluidPilot usprawnia obsługę stron korzystających ze zgodnego układu Fluid P
 
 Tryb głośności 5% może być przełączany skrótem i jest zapamiętywany pomiędzy kartami oraz sesjami Firefoksa.
 
+Panel w stylistyce SeatKeeper pozwala ręcznie wybrać język polski lub angielski oraz zdecydować, czy kursor ma być widoczny nad odtwarzaczem.
+
 Rozszerzenie działa automatycznie po wykryciu obsługiwanego odtwarzacza. Nie zbiera ani nie wysyła danych użytkownika.
 
 ## Uzasadnienie uprawnień
