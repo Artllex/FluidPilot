@@ -1,0 +1,32 @@
+{
+  "extensionName": {
+    "message": "FluidPilot"
+  },
+  "extensionDescription": {
+    "message": "Sterowanie Fluid Playerem, regulowane pętle, podgląd osi czasu oraz eksport GIF i WebM."
+  },
+  "popupSubtitle": {
+    "message": "Sterowanie odtwarzaczem"
+  },
+  "popupStatus": {
+    "message": "FluidPilot działa automatycznie na obsługiwanych odtwarzaczach."
+  },
+  "shortcutLoop": {
+    "message": "Włącz lub wyłącz pętlę"
+  },
+  "shortcutEdges": {
+    "message": "Zmień lewą lub prawą granicę"
+  },
+  "shortcutGif": {
+    "message": "Eksportuj pętlę jako GIF"
+  },
+  "shortcutVideo": {
+    "message": "Eksportuj pętlę jako WebM"
+  },
+  "shortcutVolume": {
+    "message": "Przełącz globalną głośność 5%"
+  },
+  "popupHint": {
+    "message": "Najedź na odtwarzacz lub jego oś czasu i użyj skrótów."
+  }
+}

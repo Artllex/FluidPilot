@@ -1,0 +1,11 @@
+:root { color-scheme: dark; font: 13px/1.4 system-ui, sans-serif; }
+body { width: 300px; margin: 0; padding: 16px; color: #e8f8ff; background: #07162f; }
+header { display: flex; align-items: center; gap: 12px; }
+h1 { margin: 0; font-size: 20px; }
+header p { margin: 2px 0 0; color: #83dfff; }
+.status { margin: 14px 0; padding: 9px 10px; border: 1px solid #124fa5; border-radius: 8px; background: #092451; }
+dl { margin: 0; }
+dl div { display: grid; grid-template-columns: 92px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid #15335f; }
+dt { color: #35d7f5; font-weight: 700; }
+dd { margin: 0; }
+.hint { margin: 12px 0 0; color: #9bb1cf; font-size: 12px; }

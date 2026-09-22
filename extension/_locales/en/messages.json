@@ -1,0 +1,32 @@
+{
+  "extensionName": {
+    "message": "FluidPilot"
+  },
+  "extensionDescription": {
+    "message": "Fluid Player controls, adjustable loops, timeline preview, and GIF and WebM export."
+  },
+  "popupSubtitle": {
+    "message": "Player controls"
+  },
+  "popupStatus": {
+    "message": "FluidPilot runs automatically on supported players."
+  },
+  "shortcutLoop": {
+    "message": "Toggle the loop"
+  },
+  "shortcutEdges": {
+    "message": "Adjust the left or right edge"
+  },
+  "shortcutGif": {
+    "message": "Export the loop as a GIF"
+  },
+  "shortcutVideo": {
+    "message": "Export the loop as WebM"
+  },
+  "shortcutVolume": {
+    "message": "Toggle global 5% volume"
+  },
+  "popupHint": {
+    "message": "Point at the player or its timeline and use the shortcuts."
+  }
+}
